@@ -5,22 +5,19 @@
     },
     "api": {
       "root": "apps/api/",
-      "entrypoint": "dist/app.js",
+      "entrypoint": "src/app.ts",
+      "outputDirectory": ".",
       "buildCommand": "pnpm build"
     }
   },
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": {
-        "service": "api"
-      }
+      "destination": { "service": "api" }
     },
     {
       "source": "/(.*)",
-      "destination": {
-        "service": "web"
-      }
+      "destination": { "service": "web" }
     }
   ]
 }
