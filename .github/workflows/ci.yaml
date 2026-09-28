@@ -34,7 +34,7 @@ jobs:
       - name: Build
         run: pnpm build
 
-deploy:
+  deploy:
   name: Deploy
   needs: ci
   runs-on: ubuntu-latest
