@@ -1,7 +1,8 @@
 import Fastify from "fastify";
+import testRoutes from "./routes/test.routes";
 
-const app = Fastify({
-  logger: true,
-});
+const fastify = Fastify({ logger: true });
 
-export default app;
+fastify.register(testRoutes, { prefix: "/api" });
+
+fastify.listen({ port: 3000 });

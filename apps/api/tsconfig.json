@@ -1,17 +1,15 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-
-    "rootDir": ".",
-    "outDir": "dist",
-
+    "module": "ES2022",
+    "moduleResolution": "bundler",
+    "rootDir": "src",
+    "outDir": "./dist",
     "types": ["node"],
-
     "strict": true,
     "verbatimModuleSyntax": true,
     "isolatedModules": true,
     "skipLibCheck": true
-  }
+  },
+  "include": ["src"]
 }
