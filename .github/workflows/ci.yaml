@@ -31,9 +31,6 @@ jobs:
       - name: Check types
         run: pnpm check-types
 
-      - name: Build
-        run: pnpm build
-
   deploy:
     name: Deploy
     needs: ci

@@ -5,7 +5,8 @@
     },
     "api": {
       "root": "apps/api/",
-      "entrypoint": "dist/app.js"
+      "entrypoint": "dist/app.js",
+      "buildCommand": "pnpm build"
     }
   },
   "rewrites": [
