@@ -1,0 +1,19 @@
+---
+import { Image } from "astro:assets"
+import logo from "@/assets/logo-vb.svg"
+import ChangeNavContent from "@/components/change-nav-content"
+---
+
+<header
+  id="header"
+  class="fixed top-0 z-50 flex w-full items-center justify-between px-12 py-8 opacity-0"
+>
+  <Image class="header-logo" src={logo} alt={"Logo"} width={100} height={100} />
+
+  <ChangeNavContent client:load />
+
+  <button
+    class="button-login shadow-[4px_4px_0_var(--color-learning-black)] border border-learning-black bg-learning-primary px-8 py-1 font-medium"
+    >Login</button
+  >
+</header>

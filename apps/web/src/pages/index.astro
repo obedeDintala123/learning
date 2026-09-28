@@ -1,0 +1,116 @@
+---
+import Layout from "@/layouts/main.astro"
+import Header from "@/components/header.astro"
+import { ArrowRightIcon } from "@phosphor-icons/react"
+import SplashScreen from "@/components/splash"
+import ProjectsSection from "@/components/projects-section"
+---
+
+<Layout>
+  <SplashScreen client:load />
+  <main class="relative">
+    <Header />
+    <section
+      id="hero"
+      class="hero min-h-svh w-full place-content-center place-items-center bg-learning-background"
+    >
+      <div class="place-items-center space-y-8">
+        <h1
+          id="titule"
+          class="text-center text-3xl leading-[1.2] opacity-0 sm:text-6xl md:text-9xl"
+        >
+          Keep Learning <br />
+          Keep building
+        </h1>
+        <div id="subtitle" class="w-150 text-center opacity-0">
+          <span
+            >Aprendizados, experiências e projetos sobre Cloud, DevOps e
+            tecnologia, documentados ao longo da jornada.</span
+          >
+        </div>
+
+        <div id="cta" class="opacity-0">
+          <button
+            class="flex items-center gap-4 border border-learning-black bg-learning-primary px-8 py-2 font-medium shadow-[4px_4px_0_var(--color-learning-black)]"
+          >
+            Explorar
+            <ArrowRightIcon className="size-4" />
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <ProjectsSection client:visible />
+  </main>
+  <script>
+    import {
+      createTimeline,
+      utils,
+      splitText,
+      stagger,
+    } from "animejs"
+
+    const [header] = utils.$("#header")
+    const [titule] = utils.$("#titule")
+    const [subtitle] = utils.$("#subtitle")
+    const [cta] = utils.$("#cta")
+    const [projectsSection] = utils.$("#projects")
+    const { chars } = splitText(titule, {
+      chars: { wrap: "clip" },
+    })
+
+    utils.set(titule, { opacity: 1 })
+    utils.set(chars, { opacity: 0 })
+
+    const startIntro = () => {
+      if (!header || !titule || !subtitle || !cta) return
+
+      createTimeline()
+        .add(header, {
+          opacity: [0, 1],
+          y: [-80, 0],
+          duration: 700,
+          ease: "out(3)",
+        })
+        .add(chars, {
+          opacity: [{ from: 0, to: 1 }],
+          y: [{ to: ["100%", "0%"] }],
+          duration: 750,
+          ease: "out(3)",
+          delay: stagger(50),
+        })
+        .add(subtitle, {
+          opacity: [0, 1],
+          y: [20, 0],
+          duration: 500,
+          ease: "out(2)",
+        })
+        .add(cta, {
+          opacity: [0, 1],
+          y: [20, 0],
+          duration: 500,
+          ease: "out(2)",
+        })
+    }
+
+    if (document.documentElement.dataset.splashComplete === "true") {
+      startIntro()
+    } else {
+      document.addEventListener("splashcomplete", startIntro, { once: true })
+    }
+
+    const updateHeaderState = () => {
+      if (!header || !projectsSection) return
+
+      header.classList.toggle(
+        "on-projects",
+        projectsSection.getBoundingClientRect().top <= 0
+      )
+    }
+
+    updateHeaderState()
+    document.addEventListener("scroll", updateHeaderState, { passive: true })
+
+    
+  </script>
+</Layout>
