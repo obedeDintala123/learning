@@ -1,6 +1,6 @@
 import { createScene } from './scene';
 
-export function createCanvas(container) {
+export function createCanvas(container: any) {
   const canvas = document.createElement('canvas');
   canvas.id = 'canvas-3d';
   canvas.style.width = '100%';
