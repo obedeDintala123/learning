@@ -1,5 +1,6 @@
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js"
 import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js"
+import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js"
 import { showLoaderError, updateLoader } from "./loader"
 import type { Object3D, Scene } from "three"
 
@@ -10,6 +11,7 @@ dracoLoader.setDecoderPath("/draco/")
 const loader = new GLTFLoader()
 
 loader.setDRACOLoader(dracoLoader)
+loader.setMeshoptDecoder(MeshoptDecoder)
 
 let model: Object3D | null = null
 let baseY = 0

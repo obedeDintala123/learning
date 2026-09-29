@@ -7,6 +7,13 @@ import ProjectsSection from "@/components/projects-section"
 ---
 
 <Layout>
+  <link
+    slot="head"
+    rel="preload"
+    href="/models/cloud.glb"
+    as="fetch"
+    crossorigin="anonymous"
+  />
   <SplashScreen client:load />
   <main class="relative">
     <Header />
@@ -43,12 +50,7 @@ import ProjectsSection from "@/components/projects-section"
     <ProjectsSection client:visible />
   </main>
   <script>
-    import {
-      createTimeline,
-      utils,
-      splitText,
-      stagger,
-    } from "animejs"
+    import { createTimeline, utils, splitText, stagger } from "animejs"
 
     const [header] = utils.$("#header")
     const [titule] = utils.$("#titule")
@@ -110,7 +112,5 @@ import ProjectsSection from "@/components/projects-section"
 
     updateHeaderState()
     document.addEventListener("scroll", updateHeaderState, { passive: true })
-
-    
   </script>
 </Layout>
