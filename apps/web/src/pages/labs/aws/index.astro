@@ -1,0 +1,129 @@
+---
+import Layout from "@/layouts/main.astro"
+import Header from "@/components/header.astro"
+import { ArrowRightIcon } from "@phosphor-icons/react"
+import ProjectsSection from "@/components/projects-section"
+import LabHeader from "@/components/labs/lab-header"
+import LabModule from "@/components/labs/lab-module"
+---
+
+<Layout title="LAB AWS">
+  <main class="relative">
+    <LabHeader
+      name="AWS"
+      nav={[
+        { label: "Home", href: "/" },
+        { label: "Módulos", href: "#modulos" },
+        { label: "Recursos", href: "#recursos" },
+      ]}
+    />
+    <section
+      id="hero"
+      class="hero min-h-svh w-full place-content-center place-items-center bg-learning-background"
+    >
+      <div class="place-items-center space-y-8">
+        <h1
+          id="titule"
+          class="text-center text-3xl leading-[1.2] opacity-0 sm:text-6xl md:text-9xl"
+        >
+          Aprenda AWS <br />
+          Construindo
+        </h1>
+        <div id="subtitle" class="w-150 text-center opacity-0">
+          <span>
+            Uma sequência de módulos para aprender os fundamentos da AWS na
+            prática: computação, armazenamento, redes e muito mais.</span
+          >
+        </div>
+
+        <div id="cta" class="opacity-0">
+          <a
+            href="#modulos"
+            class="flex items-center gap-4 border border-learning-black bg-learning-primary px-8 py-2 font-medium shadow-[4px_4px_0_var(--color-learning-black)]"
+          >
+            Explorar
+            <ArrowRightIcon className="size-4" />
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="min-h-svh w-full bg-learning-black grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      <LabModule
+        order={1}
+        title="Armazenamento com S3"
+        description="Cria buckets, envia objetos e configura permissões no Floci."
+        duration="45 min"
+        services={["S3", "IAM"]}
+        href="/labs/aws/s3"
+      />
+      <LabModule
+        order={2}
+        title="Computação com EC2"
+        description="Lança instâncias e liga-te a elas."
+        duration="1 h"
+        services={["EC2", "VPC"]}
+      />
+    </section>
+  </main>
+  <script>
+    import { createTimeline, utils, splitText, stagger } from "animejs"
+
+    const [header] = utils.$("#header")
+    const [titule] = utils.$("#titule")
+    const [subtitle] = utils.$("#subtitle")
+    const [cta] = utils.$("#cta")
+    const [projectsSection] = utils.$("#modules")
+    const { chars } = splitText(titule, {
+      chars: { wrap: "clip" },
+    })
+
+    utils.set(titule, { opacity: 1 })
+    utils.set(chars, { opacity: 0 })
+
+    const startIntro = () => {
+      if (!header || !titule || !subtitle || !cta) return
+
+      createTimeline()
+        .add(header, {
+          opacity: [0, 1],
+          y: [-80, 0],
+          duration: 700,
+          ease: "out(3)",
+        })
+        .add(chars, {
+          opacity: [{ from: 0, to: 1 }],
+          y: [{ to: ["100%", "0%"] }],
+          duration: 750,
+          ease: "out(3)",
+          delay: stagger(50),
+        })
+        .add(subtitle, {
+          opacity: [0, 1],
+          y: [20, 0],
+          duration: 500,
+          ease: "out(2)",
+        })
+        .add(cta, {
+          opacity: [0, 1],
+          y: [20, 0],
+          duration: 500,
+          ease: "out(2)",
+        })
+    }
+
+    const updateHeaderState = () => {
+      if (!header || !projectsSection) return
+
+      header.classList.toggle(
+        "on-projects",
+        projectsSection.getBoundingClientRect().top <= 0
+      )
+    }
+
+    updateHeaderState()
+
+    startIntro()
+    document.addEventListener("scroll", updateHeaderState, { passive: true })
+  </script>
+</Layout>

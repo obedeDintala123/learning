@@ -43,8 +43,6 @@ export function createScene(container: HTMLElement, canvas: HTMLCanvasElement) {
   directionalLight.castShadow = true
   scene.add(directionalLight)
 
-  // Guarda a referência do modelo carregado (usado para calcular o
-  // enquadramento da câmera ao focar em um hotspot)
   let currentModel: THREE.Object3D | null = null
   loadModel("/models/cloud.glb", scene, container)
     .then((model) => {
@@ -152,7 +150,7 @@ export function createScene(container: HTMLElement, canvas: HTMLCanvasElement) {
   // Ajuste as posições (x, y, z) e o raio de cada esfera conforme a
   // posição real de cada elemento no seu modelo
   createHotspot("aws", new THREE.Vector3(0, 0.3, -0.1), 0.9, () => {
-    console.log("Ação: clicou na aws")
+    window.open("/labs/aws", "_self")
   })
 
   createHotspot(
