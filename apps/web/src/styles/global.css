@@ -140,7 +140,7 @@
   }
   html {
     @apply font-sans text-learning-black;
-    scroll-behavior: smooth
+    scroll-behavior: smooth;
   }
 }
 
@@ -174,4 +174,13 @@ header.on-projects .header-logo {
 header.on-projects .main-nav {
   background-color: var(--color-learning-background);
   color: #252525;
+}
+
+header.on-modules .main-nav {
+  background-color: var(--color-learning-background);
+  color: #252525;
+}
+
+header.on-modules .header-lab-title {
+  color: var(--color-learning-background);
 }

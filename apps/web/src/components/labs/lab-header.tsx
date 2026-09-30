@@ -1,9 +1,14 @@
 import React from "react"
 import { ArrowLeftIcon } from "@phosphor-icons/react"
+import ChangeNavContent from "../change-nav-content"
 
 interface LabHeaderProps {
   name: string
-  nav?: {
+  sections?: {
+    id: string
+    title?: string
+  }[]
+  links?: {
     label: string
     href: string
   }[]
@@ -12,31 +17,25 @@ interface LabHeaderProps {
 
 export default function LabHeader({
   name,
-  nav = [],
+  sections = [],
+  links = [],
   progressBar,
 }: LabHeaderProps) {
   return (
     <header
-      id="header"
+      id="header-lab"
       className="fixed top-0 z-50 flex w-full items-center justify-between px-12 py-8 opacity-0"
     >
       <div className="flex items-center justify-between gap-4 px-4 py-3 sm:px-8 sm:py-4">
-        <h1 className="truncate text-xl leading-tight sm:text-2xl">{name}</h1>
-        {nav.length > 0 && (
-          <nav className="main-nav absolute top-0 left-1/2 flex h-20 w-200 -translate-x-1/2 items-center justify-center gap-4 bg-learning-black text-white transition-all duration-500 [clip-path:polygon(0_0,100%_0,90%_100%,10%_100%)]">
-            <ul className="flex items-center gap-4 text-sm sm:gap-6 sm:text-base">
-              {nav.map((item) => (
-                <li key={item.href}>
-                  <a
-                    href={item.href}
-                    className="underline-offset-4 hover:underline"
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
+        <h1 className="header-lab-title truncate text-xl leading-tight sm:text-2xl">
+          {name}
+        </h1>
+        {links && (
+          <ChangeNavContent
+            sections={sections}
+            links={links}
+            headingAs="p"
+          />
         )}
       </div>
 
